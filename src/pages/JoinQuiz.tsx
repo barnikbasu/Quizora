@@ -116,7 +116,7 @@ const JoinQuiz = () => {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <Card className="w-full max-w-md p-8 bg-card border-border">
+      <Card className="w-full max-w-md p-8 bg-card border-border rounded-3xl">
         <Button
           variant="ghost"
           onClick={() => navigate('/')}
@@ -157,14 +157,16 @@ const JoinQuiz = () => {
             />
           </div>
 
-          <Button
-            onClick={joinQuiz}
-            disabled={loading}
-            size="lg"
-            className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-          >
-            {loading ? "Joining..." : "Join Quiz"}
-          </Button>
+          <div className="flex justify-center">
+            <Button
+              onClick={joinQuiz}
+              disabled={loading}
+              size="lg"
+              className="w-48 bg-primary text-primary-foreground hover:bg-primary/90 rounded-full"
+            >
+              {loading ? "Joining..." : "Join Quiz"}
+            </Button>
+          </div>
         </div>
       </Card>
     </div>
