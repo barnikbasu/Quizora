@@ -3,6 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "next-themes";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import Index from "./pages/Index";
 import CreateQuiz from "./pages/CreateQuiz";
 import JoinQuiz from "./pages/JoinQuiz";
@@ -15,21 +17,24 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/create-quiz" element={<CreateQuiz />} />
-          <Route path="/join" element={<JoinQuiz />} />
-          <Route path="/quiz/:id" element={<QuizDetails />} />
-          <Route path="/host/:sessionId" element={<HostQuiz />} />
-          <Route path="/play/:sessionId" element={<PlayQuiz />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <ThemeToggle />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/create-quiz" element={<CreateQuiz />} />
+            <Route path="/join" element={<JoinQuiz />} />
+            <Route path="/quiz/:id" element={<QuizDetails />} />
+            <Route path="/host/:sessionId" element={<HostQuiz />} />
+            <Route path="/play/:sessionId" element={<PlayQuiz />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
