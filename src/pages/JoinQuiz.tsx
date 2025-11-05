@@ -120,7 +120,7 @@ const JoinQuiz = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/10 to-accent/10 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md p-8 bg-card border-border rounded-3xl">
+      <Card className="w-full max-w-md p-8 bg-card border-border border-x-primary-foreground-30 rounded-3xl shadow-2xl">
         <Button
           variant="ghost"
           onClick={() => navigate('/')}
@@ -144,9 +144,9 @@ const JoinQuiz = () => {
               id="code"
               value={code}
               onChange={(e) => setCode(e.target.value.toUpperCase())}
-              placeholder="Enter code (try 1234)"
+              placeholder="Enter code"
               maxLength={6}
-              className="mt-2 text-center text-xl font-bold tracking-widest rounded-xl bg-input border-border placeholder:text-xs md:placeholder:text-sm"
+              className="mt-2 text-center text-xl lg:text-2xl font-bold tracking-widest rounded-xl bg-input border-border placeholder:text-sm md:placeholder:text-sm"
             />
           </div>
 
@@ -157,7 +157,7 @@ const JoinQuiz = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your name"
-              className="mt-2 bg-input border-border rounded-xl text-foreground"
+              className="mt-2 bg-input border-border rounded-xl font-bold text-foreground"
             />
           </div>
 
@@ -166,7 +166,7 @@ const JoinQuiz = () => {
               onClick={joinQuiz}
               disabled={loading}
               size="lg"
-              className="w-48 bg-primary text-primary-foreground hover:bg-primary/80 rounded-full"
+              className="w-48 bg-primary text-primary-foreground hover:bg-primary/80 rounded-full border border-primary-foreground-30"
             >
               {loading ? "Joining..." : "Join Quiz"}
             </Button>
