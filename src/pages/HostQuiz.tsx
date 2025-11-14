@@ -155,9 +155,6 @@ const HostQuiz = () => {
     );
   }
   
-  // ... (rest of the file is unchanged) ...
-  // ... (JSX for host view) ...
-  // ...
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/5 p-2 ">
       <div className="container max-w-6xl mx-auto mt-20">
