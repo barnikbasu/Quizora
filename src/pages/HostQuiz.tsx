@@ -79,7 +79,6 @@ const HostQuiz = () => {
     session?.show_leaderboard, 
     session?.currentQuestionEndTime,
     currentQuestion?.time_limit, // <-- THIS IS THE FIX
-    toast
   ]);
 
   const showLeaderboardMutation = useMutation(api.gameplay.showLeaderboard);
