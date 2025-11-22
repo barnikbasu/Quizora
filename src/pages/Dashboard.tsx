@@ -1,26 +1,25 @@
 import { AppSidebar } from "@/components/app-sidebar"
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { Plus, Trash2, Image as ImageIcon, ArrowLeft, MoreVertical, Edit, Play } from "lucide-react"
+import { Plus, Trash2, MoreVertical, Edit, Play, Clock } from "lucide-react"
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Card } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
-
+import { formatDistanceToNow } from "date-fns"; // Helper for "2 days ago"
 
 export default function Dashboard() {
-  const Navigate = useNavigate();
+  // FIX: Renamed 'Navigate' to 'navigate' to follow conventions
+  const navigate = useNavigate(); 
   const { toast } = useToast();
 
   const myQuizzes = useQuery(api.quizzes.getMyQuizzes);
-  const createSession = useMutation(api.sessions.createSession);
   const deleteQuiz = useMutation(api.quizzes.deleteQuiz);
 
   return (
@@ -34,7 +33,7 @@ export default function Dashboard() {
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <div className="flex flex-row w-full justify-end">
-            <Button onClick={() => Navigate('/create-quiz')} className="bg-primary text-primary-foreground hover:bg-primary/80 rounded-full border border-primary-foreground-30 mr-10 mt-5 p-5">
+            <Button onClick={() => navigate('/create-quiz')} className="bg-primary text-primary-foreground hover:bg-primary/80 rounded-full border border-primary-foreground-30 mr-10 mt-5 p-5">
                         <Plus className="h-4 w-4 mr-2" />
                         Create Quiz
                       </Button>
@@ -42,13 +41,10 @@ export default function Dashboard() {
           <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min p-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {(myQuizzes || []).map((q: any) => (
-                <Card key={String(q._id)} className="p-4">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="text-lg font-bold">{q.title}</h3>
-                      {q.description && <p className="text-sm text-muted-foreground">{q.description}</p>}
-                    </div>
-                    <div>
+                <Card key={String(q._id)} className="p-4 flex flex-col justify-between">
+                  <div>
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="text-lg font-bold line-clamp-1">{q.title}</h3>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <button className="p-2 rounded hover:bg-muted/30">
@@ -56,19 +52,17 @@ export default function Dashboard() {
                           </button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
-                          <DropdownMenuItem onSelect={() => Navigate(`/create-quiz?quizId=${String(q._id)}`)}>
+                          <DropdownMenuItem onSelect={() => navigate(`/create-quiz?quizId=${String(q._id)}`)}>
                             <Edit className="mr-2 h-4 w-4" /> Edit
                           </DropdownMenuItem>
-                          <DropdownMenuItem onSelect={() => Navigate(`/quiz/${String(q._id)}`)}>
+                          <DropdownMenuItem onSelect={() => navigate(`/quiz/${String(q._id)}`)}>
                             <Play className="mr-2 h-4 w-4" /> Run
                           </DropdownMenuItem>
                           <DropdownMenuItem onSelect={async () => {
-                            if (!confirm(`Delete quiz \"${q.title}\"? This cannot be undone.`)) return;
+                            if (!confirm(`Delete quiz "${q.title}"? This cannot be undone.`)) return;
                             try {
                               await deleteQuiz({ id: q._id });
                               toast({ title: "Deleted", description: "Quiz deleted." });
-                              // Force a refresh by reloading the page (Convex queries should update automatically, but refresh to be sure)
-                              window.location.reload();
                             } catch (err: any) {
                               toast({ title: "Error", description: `Failed to delete quiz: ${err.message}`, variant: "destructive" });
                             }
@@ -78,6 +72,13 @@ export default function Dashboard() {
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </div>
+                    {q.description && <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{q.description}</p>}
+                  </div>
+                  
+                  {/* New: Created date badge */}
+                  <div className="flex items-center text-xs text-muted-foreground mt-4">
+                    <Clock className="h-3 w-3 mr-1" />
+                    <span>Created {formatDistanceToNow(new Date(q._creationTime), { addSuffix: true })}</span>
                   </div>
                 </Card>
               ))}
