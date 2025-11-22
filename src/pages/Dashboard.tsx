@@ -34,15 +34,27 @@ export default function Dashboard() {
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <div className="flex flex-row w-full justify-end">
-            <Button onClick={() => Navigate('/create-quiz')} className="bg-primary text-primary-foreground hover:bg-primary/80 rounded-full border border-primary-foreground-30 mr-10 mt-5 p-5">
+            <Button variant="outline" onClick={() => Navigate('/join')} className="text-secondary hover:bg-primary/80 rounded-lg border border-primary-foreground-30 mr-10 mt-5 p-5 px-6">
+                        Join Quiz
+                      </Button>
+          </div>
+          <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min p-6">
+             <div className="flex flex-row w-full justify-end">
+            <Button onClick={() => Navigate('/create-quiz')} className="bg-primary text-primary-foreground hover:bg-background/80 hover:text-secondary rounded-full border border-primary-foreground-30 mr-10 mb-5 p-5">
                         <Plus className="h-4 w-4 mr-2" />
                         Create Quiz
                       </Button>
           </div>
-          <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min p-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="bg-muted/30 min-h-[100vh] flex-1 rounded-md md:min-h-min ">
+            <div className="px-32 py-10 h-screen">
+            <div className="flex flex-row justify-between m-5 text-muted-foreground/70">
+              <p>Quiz details</p>
+              <p>Created</p>
+              <p>More actions</p>
+            </div>
+            <div className="flex flex-col gap-4 ">
               {(myQuizzes || []).map((q: any) => (
-                <Card key={String(q._id)} className="p-4">
+                <Card key={String(q._id)} className="p-4 flex-1 min-w-[260px] max-w-[100vw] max-h-[75px]">
                   <div className="flex justify-between items-start">
                     <div>
                       <h3 className="text-lg font-bold">{q.title}</h3>
@@ -67,7 +79,6 @@ export default function Dashboard() {
                             try {
                               await deleteQuiz({ id: q._id });
                               toast({ title: "Deleted", description: "Quiz deleted." });
-                              // Force a refresh by reloading the page (Convex queries should update automatically, but refresh to be sure)
                               window.location.reload();
                             } catch (err: any) {
                               toast({ title: "Error", description: `Failed to delete quiz: ${err.message}`, variant: "destructive" });
@@ -81,6 +92,8 @@ export default function Dashboard() {
                   </div>
                 </Card>
               ))}
+            </div>
+            </div>
             </div>
           </div>
         </div>
