@@ -320,8 +320,6 @@ const HostQuiz = () => {
               className="h-32 w-32 sm:h-32 sm:w-32 md:h-32 md:w-32 lg:h-40 lg:w-40 mx-auto" />
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-bold mb-8">Final Leaderboard!</h2>
               
-              
-
               <div className="space-y-3 mb-8">
                 {participants?.map((p, i) => (
                   <div 

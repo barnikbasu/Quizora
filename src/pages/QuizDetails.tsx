@@ -86,27 +86,27 @@ const QuizDetails = () => {
         <Button
           variant="ghost"
           onClick={() => navigate('/dashboard')}
-          className="mb-6 rounded-full"
+          className="hover:bg-gradient-to-r from-primary to-secondary mb-6 rounded-full"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Home
         </Button>
 
-        <Card className="p-8 mb-6">
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+        <Card className="flex flex-row justify-between items-center px-6 py-3 mb-6">
+          <div>
+          <h1 className="text-2xl font-bold mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             {quiz?.title}
           </h1>
           {quiz?.description && (
-            <p className="text-muted-foreground mb-6">{quiz.description}</p>
-          )}
+            <p className="text-muted-foreground mb-2">{quiz.description}</p>
+          )} </div>
 
-          <div className="flex gap-2 justify-center md:justify-start lg:justify-start">
-            {/* "Start Quiz" button is now always visible */}
+          <div className="flex gap-4">
             <Button
               onClick={startQuiz}
               disabled={loading}
-              size="lg"
-              className="bg-gradient-to-r from-primary to-secondary px-3 py-2 text-sm sm:px-4 sm:py-2 sm:text-base md:px-5 md:py-3 md:text-lg rounded-full"
+              size="sm"
+              className="bg-gradient-to-r from-primary to-secondary hover:opacity-70 px-3 py-2 text-sm sm:px-4 sm:py-2 sm:text-base md:px-5 md:py-3 md:text-md rounded-lg"
             >
               {loading ? (
                 <Loader2 className=" h-5 w-5 animate-spin" />
@@ -117,9 +117,9 @@ const QuizDetails = () => {
             </Button>
             <Button
               onClick={copyQuizLink}
-              size="lg"
+              size="sm"
               variant="outline"
-              className="px-3 py-2 text-sm sm:px-4 sm:py-2 sm:text-base md:px-5 md:py-3 md:text-lg rounded-full"
+              className="hover:bg-gradient-to-r from-primary to-secondary px-3 py-2 text-sm sm:px-4 sm:py-2 sm:text-base md:px-5 md:py-3 md:text-md rounded-lg"
             >
               {copied ? (
                 <>
