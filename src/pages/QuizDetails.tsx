@@ -81,7 +81,7 @@ const QuizDetails = () => {
   // Auth logic removed
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/5 py-8">
+    <div className="min-h-screen bg-gradient-to-b from-white/40 via-white/60 to-white/80 dark:bg-gradient-to-b dark:from-black/80 dark:via-black/80 dark:to-black/80 py-8">
       <div className="container max-w-4xl mx-auto px-4">
         <Button
           variant="ghost"
@@ -123,13 +123,13 @@ const QuizDetails = () => {
             >
               {copied ? (
                 <>
-                  <CheckCircle className="mr-2 h-5 w-5" />
+                  <CheckCircle className="h-5 w-5" />
                   Copied!
                 </>
               ) : (
                 <>
                   <Copy className="h-5 w-5" />
-                  Copy Link for Host
+                  Copy Host Link
                 </>
               )}
             </Button>
