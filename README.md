@@ -19,7 +19,7 @@ It aims to help users test their knowledge across different topics through inter
 ## Setup Instructions
 1. Clone the repository:  
 ```bash
-git clone https://github.com/parinaB/Quizora.git
+git clone https://github.com/Nilam-Kumari-Mahato/Quizora.git
 ```
 
 
