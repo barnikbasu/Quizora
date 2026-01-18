@@ -131,4 +131,3 @@ This project is part of the Winter of Code 5.0 program.
 
 - **Repository:** https://github.com/Nilam-Kumari-Mahato/Quizora
 - **Issues:** https://github.com/Nilam-Kumari-Mahato/Quizora/issues
-
