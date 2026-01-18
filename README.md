@@ -1,165 +1,134 @@
-# 🎯 Quizora
+# Quizora
 
-Quizora is a **web-based quiz application** designed to deliver **fast-paced, engaging quizzes with real-time feedback**.  
-It helps users test their knowledge across different topics through **interactive, timed quizzes**.
+Quizora is a web-based quiz application designed to provide fast-paced, engaging quizzes with real-time feedback.  
+It aims to help users test their knowledge across different topics through interactive quizzes.
 
-⚠️ **Note:** This project is currently under development. Some features and pages may be incomplete.
+⚠️ **Note:** This project is currently under development; some pages or features may be incomplete.
 
----
+## Features
 
-## 🚀 What Does Quizora Do?
+- ✅ **Real-time Quiz Sessions** - Create and join live quiz rooms with unique join codes
+- ✅ **Timed Quizzes** - Configurable time limits per question (5 seconds to 10 minutes)
+- ✅ **Multiple-choice Questions** - Support for 2-4 answer options per question
+- ✅ **Score Tracking** - Real-time leaderboard with live score updates
+- ✅ **User Authentication** - Secure authentication via Clerk
+- ✅ **Quiz Management** - Create, edit, and delete quizzes with ease
+- ✅ **Host & Player Modes** - Separate interfaces for quiz hosts and participants
+- ✅ **Question Images** - Add images to quiz questions for richer content
+- ✅ **Responsive Design** - Works seamlessly on desktop and mobile devices
+- ✅ **Dark Mode** - Beautiful dark and light theme support
 
-Quizora allows users to:
-- Attempt **multiple-choice quizzes**
-- Answer questions within a **time limit**
-- Receive **instant feedback**
-- View their **final score**
-- Experience learning in a **gamified and interactive way**
+## Tech Stack
 
-The goal is to make learning more engaging by combining **speed, accuracy, and competition**.
+- **Frontend:** React 18 + Vite + TypeScript
+- **Styling:** Tailwind CSS + shadcn/ui components
+- **Backend:** Convex (real-time database and backend)
+- **Authentication:** Clerk
+- **State Management:** Zustand
+- **Routing:** React Router DOM
+- **UI Components:** Radix UI + Lucide React icons
+- **Forms:** React Hook Form + Zod validation
+- **Charts:** Recharts (for analytics/visualizations)
 
----
+## Prerequisites
 
-## 🛠️ Tech Stack
+Before you begin, ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [Convex CLI](https://docs.convex.dev/installation) - `npm install -g convex`
+- A [Clerk](https://clerk.com/) account (for authentication)
+- A [Convex](https://www.convex.dev/) account (for backend)
 
-### Frontend
-- **React** – Component-based UI development
-- **Vite** – Fast build tool and development server
-- **JavaScript / TypeScript** – Application logic
+## Setup Instructions
 
-### Styling
-- **Tailwind CSS** – Utility-first CSS framework
+### 1. Clone the repository
 
-### Backend
-- **None (TBD)**  
-  > Currently, Quizora is a frontend-only project. All quiz data is static.
-
----
-
-## 📁 Project Structure (Overview)
-
-src/
- ├── components/
- │    ├── Quiz.tsx
- │    ├── Question.tsx
- │    ├── Timer.tsx
- │    ├── Result.tsx
- │
- ├── data/
- │    └── questions.ts
- │
- ├── App.tsx
- └── main.tsx
-
-
----
-
-## 🧠 Where Does the Quiz Logic Live?
-
-- The **main quiz logic** is handled inside:
-src/components/Quiz.tsx
-
-yaml
-Copy code
-- This file manages:
-- Current question index
-- Selected answers
-- Score calculation
-- Timer coordination
-
----
-
-## 🧩 Main Components Explained
-
-### `App.tsx`
-- Root component of the app
-- Decides which screen to display (quiz, result, etc.)
-
-### `Quiz.tsx`
-- Heart of the application
-- Controls quiz flow and state
-
-### `Question.tsx`
-- Displays the question and options
-- Handles user option selection
-- **Safe for UI improvements**
-
-### `Timer.tsx`
-- Manages countdown timer
-- Can be enhanced with animations or warnings
-
-### `Result.tsx`
-- Shows final score and quiz summary
-- Ideal for UX enhancements
-
----
-
-## ✅ Beginner-Friendly Files to Edit First
-
-If you are a beginner, start with these files:
-
-| File | Why |
-|-----|-----|
-| `Question.tsx` | UI & option rendering |
-| `Timer.tsx` | Styling & visual feedback |
-| `Result.tsx` | Score display & UX |
-| `questions.ts` | Add or improve quiz data |
-| `README.md` | Documentation improvements |
-
-⚠️ Avoid major changes to `Quiz.tsx` unless guided by a mentor.
-
----
-
-## ✨ Planned Features
-
-- ⏱️ Timed quizzes
-- 📋 Multiple-choice questions
-- 🧮 Score tracking
-- ⚡ Real-time feedback
-- 🏆 Leaderboards (future)
-- 👤 User profiles (future)
-
----
-
-## ⚙️ Setup Instructions
-
-### Clone the Repository
 ```bash
 git clone https://github.com/Nilam-Kumari-Mahato/Quizora.git
-Install Dependencies
-bash
-Copy code
+cd Quizora
+```
+
+### 2. Install Dependencies
+
+```bash
 npm install
-Run the Application
-bash
-Copy code
+```
+
+### 3. Set up Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+VITE_CONVEX_URL=your_convex_url_here
+VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key_here
+```
+
+**How to get these values:**
+- **Convex URL**: Run `npx convex dev` in your terminal. It will create a deployment and provide the URL.
+- **Clerk Publishable Key**: Get it from your [Clerk Dashboard](https://dashboard.clerk.com/) under API Keys.
+
+### 4. Set up Convex Backend
+
+```bash
+npx convex dev
+```
+
+This will:
+- Start the Convex development server
+- Set up the database schema
+- Sync your backend functions
+- Provide the `VITE_CONVEX_URL` for your `.env` file
+
+### 5. Configure Clerk Authentication
+
+In your Convex dashboard, add the following environment variable:
+- `CLERK_ISSUER_URL`: Found in your Clerk Dashboard under JWT Templates → Convex → Issuer URL
+
+### 6. Run the Application Locally
+
+```bash
 npm run dev
-Open the URL shown in the terminal to view the app in your browser.
+```
 
-🤝 Contribution Guidelines
-We welcome contributions from beginners and open-source enthusiasts!
+This will start the development server (typically at `http://localhost:8080`). Open the URL displayed in your terminal in your browser.
 
-Start with small UI/UX improvements
+## Project Structure
 
-Avoid large refactors
+```
+Quizora/
+├── src/                    # Frontend React application
+│   ├── components/         # Reusable UI components
+│   ├── pages/              # Page components (Dashboard, CreateQuiz, etc.)
+│   ├── hooks/              # Custom React hooks
+│   ├── lib/                # Utility functions
+│   └── store/              # Zustand state management
+├── convex/                 # Convex backend
+│   ├── schema.ts           # Database schema definitions
+│   ├── quizzes.ts          # Quiz CRUD operations
+│   ├── sessions.ts         # Quiz session management
+│   ├── gameplay.ts         # Real-time gameplay logic
+│   └── users.ts            # User management
+└── public/                 # Static assets
+```
 
-Write clear commit messages
+## Available Scripts
 
-Open clean and descriptive Pull Requests
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+- `npx convex dev` - Start Convex development server
 
-📄 For detailed rules, see:
-➡️ CONTRIBUTING.md
+## Contribution Guidelines
 
-🌟 Why Contribute to Quizora?
-Beginner-friendly React project
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidance on contributing to this project.
 
-Frontend-only (no backend complexity)
+## License
 
-Perfect for Winter of Code (WOC)
+This project is part of the Winter of Code 5.0 program.
 
-Easy to contribute using GitHub Web
+## Links
 
-Great for learning React + Tailwind CSS
+- **Repository:** https://github.com/Nilam-Kumari-Mahato/Quizora
+- **Issues:** https://github.com/Nilam-Kumari-Mahato/Quizora/issues
 
-Happy Contributing 🚀
-Feel free to open issues, suggest features, or submit pull requests!
